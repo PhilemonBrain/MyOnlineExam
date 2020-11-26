@@ -47,3 +47,18 @@ class User(AbstractUser):
 
     def __str__(self):
         return self.email
+
+
+class Exam(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    exam_id = models.AutoField(primary_key=True)
+    title = models.CharField(max_length=100)
+    exam_time = models.TimeField(verbose_name="Exam Duration")
+
+    def __str__(self):
+        return self.title
+
+
+class Question(models.Model):
+    question_id = models.AutoField(primary_key=True)
+    exam = models.ForeignKey(Exam, on_delete=models.CASCADE)
