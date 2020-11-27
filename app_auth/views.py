@@ -45,6 +45,14 @@ class SignUp(views.APIView):
                 serializer.save()
                 user = self.get_object(email)
                 data = self.sign_up_token(user)
+                data[id] = user.id
                 return Response({"Response": data}, status=status.HTTP_200_OK)
             return Response("Invalid Username or Password")
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class Logout(views.APIView):
+
+    def post(self, request, *args, **kwargs):
+        access_token = request.data.get("access")
+        success_token = request.data.get("refresh")

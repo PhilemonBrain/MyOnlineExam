@@ -1,3 +1,5 @@
+import os
+from django.core.exceptions import ImproperlyConfigured
 """
 Django settings for myonlineexam project.
 
@@ -20,7 +22,16 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '36))&00=@w7&s7ne(az#6(92g*^rf2l4a9@lxpyc%^ql-0ei3l'
+def get_env_value(env_variable):
+    try:
+      	return os.environ[env_variable]
+    except KeyError:
+        error_msg = 'Set the {} environment variable'.format(var_name)
+        raise ImproperlyConfigured(error_msg)
+
+
+
+SECRET_KEY = get_env_value("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
