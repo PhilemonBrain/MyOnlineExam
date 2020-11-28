@@ -3,6 +3,9 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+#react app
+my-exam/node_modules
+
 # C extensions
 *.so
 
