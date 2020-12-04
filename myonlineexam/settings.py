@@ -149,6 +149,9 @@ AUTH_USER_MODEL = 'app_auth.User'
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT  =  BASE_DIR / 'staticfiles' 
+MEDIA_ROOT= BASE_DIR / 'media/'
+MEDIA_URL= "/media/"
 
 # Heroku: Update database configuration from $DATABASE_URL.
 import dj_database_url
