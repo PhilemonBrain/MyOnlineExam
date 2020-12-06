@@ -39,6 +39,7 @@ class MyUserManager(BaseUserManager):
 class User(AbstractUser):
     username = None
     email = models.EmailField(_('Email'), unique=True)
+    # exam = models.ForeignKey(Exam, )
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
@@ -50,10 +51,12 @@ class User(AbstractUser):
 
 
 class Exam(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, related_name='exams', on_delete=models.CASCADE)
     exam_id = models.AutoField(primary_key=True)
+    instructions = models.CharField(max_length=255, default="This are instructions for a test exam") #We could consider increasing this value
     title = models.CharField(max_length=100)
     exam_time = models.TimeField(verbose_name="Exam Duration")
+    # exam_date = models.DateField
 
     def __str__(self):
         return self.title

@@ -63,6 +63,7 @@ INSTALLED_APPS = [
     'app_auth',
     # 'djangorestframework-simplejwt',
     'rest_framework_simplejwt',
+    'drf_yasg',
     # 'rest_framework.authtoken',
 ]
 
