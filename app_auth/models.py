@@ -70,3 +70,13 @@ class Question(models.Model):
     optionD = models.CharField(null=True,max_length=100)
     optionE = models.CharField(null=True,max_length=100)
     answer = models.CharField(null=False,max_length=100)
+
+#Pivot table to store exam and student emails
+class ExamUser(models.Model):
+    exam = models.ForeignKey(Exam, on_delete=models.CASCADE)
+    emails = models.TextField()
+    added_by = models.ForeignKey(User, on_delete=models.CASCADE)
+    added_on = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.id
