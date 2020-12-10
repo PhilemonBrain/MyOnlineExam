@@ -65,11 +65,15 @@ class Exam(models.Model):
 class Question(models.Model):
     # While creating a question user must enter at least two options as answer
     question_id = models.AutoField(primary_key=True)
-    exam = models.ForeignKey(Exam, on_delete=models.CASCADE)
+    exam = models.ForeignKey(Exam, related_name="questions", on_delete=models.CASCADE)
     title = models.CharField(null=False, max_length=100)
+    # order = models.IntegerField()
     optionA = models.CharField(null=False,max_length=100)
     optionB = models.CharField(null=False,max_length=100)
     optionC = models.CharField(null=True,max_length=100)
     optionD = models.CharField(null=True,max_length=100)
     optionE = models.CharField(null=True,max_length=100)
     answer = models.CharField(null=False,max_length=100)
+
+    def __str__(self):
+        return self.title

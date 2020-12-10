@@ -3,16 +3,12 @@ from django.contrib import auth
 from django.contrib.auth import get_user_model as User
 from rest_framework import status, views, generics, authentication, permissions, decorators, viewsets, exceptions
 from rest_framework.response import Response
-from .serializers import UserSerializer, ExamSerializer
+from .serializers import UserSerializer, ExamSerializer, QuestionSerializer
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt import authentication as jwt_auth
 # from rest_framework_simplejwt.authentication import JWTTokenUserAuthentication
-from .models import Exam
-
-class IsExamAuthor(permissions.BasePermission):
-    # this is a custom permission to reatrict access to CRUD of another users exam
-    def has_object_permission(self, request, view, obj):
-        return super().has_object_permission(request, view, obj)
+from .models import Exam, Question
+from .permissions import IsExamAuthor, IsQuestionAuthor
 
 
 class UserView(generics.ListCreateAPIView):
@@ -53,13 +49,17 @@ class Logout(views.APIView):
 class ExamView(viewsets.ModelViewSet):
 
     serializer_class = ExamSerializer
-    authentication_classes = [jwt_auth.JWTAuthentication]    
-    # permission_classes = (permissions.IsAuthenticated,)
+    authentication_classes = [jwt_auth.JWTAuthentication]
+    permission_classes = [IsExamAuthor]
     # queryset = Exam.objects.all()
 
+    # def getq
+
     def get_queryset(self):
+        # if setattr(self, "swagger_fake-view", False):
         user = self.request.user
         if user.is_authenticated:
+            print(user)
             return Exam.objects.filter(user=user)
         raise exceptions.PermissionDenied()
 
@@ -68,21 +68,15 @@ class ExamView(viewsets.ModelViewSet):
             serializer.save(user=self.request.user)
 
 
-class QuestionView(views.APIView):
-    #expecting an array of all the options in an 'option' field in the request.data
-    def post(self, request, *args, **kwargs):
-        # we = request.data
-        question_title = request.data.get("title")
-        answer = request.data.get("answer")
-        optionA = request.data.get("optionA")
-        optionB = request.data.get("optionB")
-        optionC = request.data.get("optionC")
-        optionD = request.data.get("optionD")
-        optionE = request.data.get("optionE")
-        # we still need to find a way to get the exam_id for this request
-        exam_id = request.data.get("exam_id")
-        exam = Exam.objects.get(id=exam_id)
-        return Response({"Response": "data"}, status=status.HTTP_200_OK)
+class QuestionView(viewsets.ModelViewSet):
+    queryset = Question.objects.all()
+    serializer_class = QuestionSerializer
+    authentication_classes = [jwt_auth.JWTAuthentication]
 
+    def has_permissions(self, request):
+        permission_classes = []
 
-# class TestTokenView(views)
+        if self.action == "update" or "destroy":
+            permission_classes = [IsQuestionAuthor]
+
+        return [permission() for permission in permission_classes]

@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from django.contrib.auth import get_user_model as User
-from .models import Exam
+from .models import Exam, Question
 
 class UserSerializer(serializers.ModelSerializer):
     exams = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
@@ -12,7 +12,19 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 class ExamSerializer(serializers.ModelSerializer):
+    questions = serializers.StringRelatedField(many=True, read_only=True)
+
+
     class Meta:
         model = Exam
         extra_kwargs = {'user': {'read_only': True}}
-        fields = '__all__'
+        # fields = '__all__'
+        # fields = ["exam_id", "instructions", "title", "exam_time"]
+        fields = ["exam_id", "instructions", "title", "exam_time", "questions"]
+
+
+class QuestionSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Question
+        fields = "__all__"
