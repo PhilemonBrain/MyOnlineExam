@@ -80,3 +80,13 @@ class QuestionView(viewsets.ModelViewSet):
             permission_classes = [IsQuestionAuthor]
 
         return [permission() for permission in permission_classes]
+
+    def perform_create(self, serializer):
+        user = self.request.user
+        if user.is_authenticated:
+            exam_id = self.validated_data["exam_id"]
+            Exam = Exam.objects.filter(exam_id=exam_id)
+            if Exam.user == user:
+                return super().perform_create(self,serializer)
+            raise exceptions.PermissionDenied()
+        raise exceptions.NotAuthenticated()
