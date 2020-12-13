@@ -1,17 +1,18 @@
 from rest_framework import serializers
 from django.contrib.auth import get_user_model as User
+from .models import Exam
 
 class UserSerializer(serializers.ModelSerializer):
+    exams = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
 
     class Meta:
         model = User()
-        fields = ['email', 'first_name', 'password']
+        extra_kwargs = {'password': {'write_only': True}}
+        fields = ['email', 'password', 'first_name', 'exams']
 
-class SignUpSerializer(serializers.ModelSerializer):
-    # this is intented for login use only
 
-    password = serializers.CharField(write_only=True)
-
+class ExamSerializer(serializers.ModelSerializer):
     class Meta:
-        model = User()
+        model = Exam
+        extra_kwargs = {'user': {'read_only': True}}
         fields = '__all__'

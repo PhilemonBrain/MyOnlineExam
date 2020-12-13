@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import User, Exam, Question
+from .models import User, Exam, Question, ExamUser
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth.admin import UserAdmin as DjangoUserAdmin
 
@@ -8,6 +8,7 @@ from django.contrib.auth.admin import UserAdmin as DjangoUserAdmin
 admin.site.register(User)
 admin.site.register(Exam)
 admin.site.register(Question)
+admin.site.register(ExamUser)
 
 class UserAdmin(DjangoUserAdmin):
     
