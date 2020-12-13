@@ -1,6 +1,7 @@
 import os
 from django.core.exceptions import ImproperlyConfigured
 import environ
+from datetime import timedelta
 """
 Django settings for myonlineexam project.
 
@@ -96,6 +97,11 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'myonlineexam.wsgi.application'
+
+# Json Web token Settings
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=15),
+}
 
 
 # Database
