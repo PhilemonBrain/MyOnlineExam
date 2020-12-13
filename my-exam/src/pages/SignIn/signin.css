@@ -1,0 +1,130 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+  /* background-color: #a60e0e; */
+}
+
+/* #leftSide of the signIn */
+
+.leftSide {
+  background-color: #a60e0e;
+  color: #fff;
+  width: 420px;
+  border: 1px solid #10507a;
+  box-sizing: border-box;
+  border-radius: 0px 10px 10px 0px;
+  display: flex;
+  flex-direction: column;
+}
+
+.leftSide h3 {
+  font-size: 2em;
+  text-align: left;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  font-weight: 500px;
+  line-height: 46.87px;
+  margin-left: 1em;
+}
+
+.subContainer {
+  justify-content: center;
+  margin-left: 1em;
+}
+
+.para-center {
+  margin-top: 10em;
+  display: flex;
+  flex-direction: column;
+}
+.para-center h2 {
+  text-align: center;
+  font-size: 3rem;
+}
+
+.para-center p {
+  text-align: center;
+}
+
+.para-center .btn {
+  align-self: center;
+  color: #fff;
+  background-color: #a60e0e;
+  border: #fff solid 1px;
+  padding: 10px 28px;
+  font-size: 16px;
+  display: inline-block;
+  text-align: center;
+  border-radius: 5%;
+}
+
+/* Styling rightside */
+.rightSide {
+  color: #000000;
+  width: 630px;
+  border: 1px solid #10507a;
+  box-sizing: border-box;
+  border-radius: 0px 10px 10px 0px;
+  display: flex;
+  flex-direction: column;
+}
+
+.form {
+  align-self: center;
+  padding-left: 6em;
+  margin-top: -16em;
+  /* margin-top: 10em; */
+}
+
+.form h3 {
+  font-size: 2em;
+  color: #a60e0e;
+  font-style: normal;
+  text-align: left;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  font-weight: 700px;
+  line-height: 52.08px;
+
+  /* margin-left: 1em; */
+}
+
+/* form directly */
+
+.form-action {
+  font-size: 1em;
+}
+
+.form-item {
+  margin-top: 2em;
+  padding: 15px 15px;
+  width: 30em;
+  display: flex;
+  flex-direction: column;
+  font-size: 16px;
+}
+
+.btn-sign {
+  align-self: center;
+  color: #fff;
+  background-color: #a60e0e;
+  border: #fff solid 1px;
+  padding: 10px 28px;
+  font-size: 16px;
+  display: inline-block;
+  text-align: center;
+  border-radius: 5%;
+  margin-top: 2em;
+}
+
+a {
+  color: #ff9501;
+  margin-top: 2em;
+}
+
+#email {
+  margin-bottom: 2em;
+}
+
+label {
+  margin-bottom: 0;
+}
