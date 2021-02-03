@@ -48,7 +48,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 # DEBUG = env.bool('DEBUG', default=False)
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['theonlinexam.herokuapp.com', "localhost"]
 
 
 # Application definition
@@ -120,7 +120,8 @@ REST_FRAMEWORK = {
         # 'rest_framework.authentication.SessionAuthentication',
         # 'rest_framework.authentication.BasicAuthentication',
         'rest_framework_simplejwt.authentication.JWTAuthentication',
-    )
+    ),
+    # 'TEST_REQUEST_DEFAULT_FORMAT': 'json'
 
 }
 

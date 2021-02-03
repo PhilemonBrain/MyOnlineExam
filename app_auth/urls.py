@@ -10,7 +10,7 @@ urlpatterns = [
     path('exams/', ExamView.as_view({"get": "list", "post":"create"}), name='all_exams'),
     path('exams/<int:pk>/', ExamView.as_view({"get": "retrieve", "post":"update"}), name='single_exam'),
 
-    path('question', QuestionView.as_view({"get": "list", "post":"create"}), name="Exam Question"),
+    path('question', QuestionView.as_view({"post":"create"}), name="Exam Question"),
     path('question/<int:pk>/', QuestionView.as_view({"get": "retrieve", "post":"update"}), name="Retrieve Question"),
     
     path('signup/', SignUp, name="signup"),

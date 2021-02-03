@@ -11,7 +11,7 @@ class QuestionSerializer(serializers.ModelSerializer):
 
 class ExamSerializer(serializers.ModelSerializer):
     # questions = serializers.StringRelatedField(many=True, read_only=True)
-    questions = QuestionSerializer(many=True, required=False)
+    questions = QuestionSerializer(many=True, required=False, read_only=True)
 
 
     class Meta:

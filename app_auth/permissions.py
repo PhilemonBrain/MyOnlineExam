@@ -7,10 +7,6 @@ class IsExamAuthor(permissions.BasePermission):
     message = "User is not the Author of this exam"
     
     def has_object_permission(self, request, view, obj):
-
-        if request.method in permissions.SAFE_METHODS:
-            return True
-
         return obj.user == request.user
 
 

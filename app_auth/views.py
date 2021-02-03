@@ -50,36 +50,33 @@ class ExamView(viewsets.ModelViewSet):
 
     serializer_class = ExamSerializer
     authentication_classes = [jwt_auth.JWTAuthentication]
-    permission_classes = [IsExamAuthor]
-    # queryset = Exam.objects.all()
-
-    # def getq
+    permission_classes = [permissions.IsAuthenticated, IsExamAuthor]
 
     def get_queryset(self):
         # if setattr(self, "swagger_fake-view", False):
         user = self.request.user
         if user.is_authenticated:
-            print(user)
             return Exam.objects.filter(user=user)
         raise exceptions.PermissionDenied()
 
     def perform_create(self, serializer):
-        if self.request.user.is_authenticated:
-            serializer.save(user=self.request.user)
+        # if self.request.user.is_authenticated:
+        serializer.save(user=self.request.user)
+        # raise exceptions.NotAuthenticated()
 
 
 class QuestionView(viewsets.ModelViewSet):
     queryset = Question.objects.all()
     serializer_class = QuestionSerializer
     authentication_classes = [jwt_auth.JWTAuthentication]
+    permission_classes = [permissions.IsAuthenticated, IsQuestionAuthor]
 
-    def has_permissions(self, request):
-        permission_classes = []
-
-        if self.action == "update" or "destroy":
-            permission_classes = [IsQuestionAuthor]
-
-        return [permission() for permission in permission_classes]
+    # def get_queryset(self):
+        # if setattr(self, "swagger_fake-view", False):
+        # user = self.request.user
+        # if user.is_authenticated:
+        #     return Exam.objects.filter(user=user)
+        # raise exceptions.PermissionDenied()
 
     def perform_create(self, serializer):
         user = self.request.user
